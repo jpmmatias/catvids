@@ -1,0 +1,548 @@
+:root{
+    font-size: 10px;
+}
+*,*::after,*::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+}
+div#pageContainer{
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #fafafa;
+}
+
+header#mastHeadContainer{
+    width: 100%;
+    height: 6rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: .7rem 1.6rem;
+    border:1px solid #e8e8e8;
+    background-color: #ffffff;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+
+}
+
+header#mastHeadContainer div.logoContainer{
+    width: 4rem;
+    height: 4rem;
+}
+
+header#mastHeadContainer div.middle{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    
+    
+}
+header#mastHeadContainer div.logoContainer img{
+    width: 100%;
+    height: auto;
+}
+header#mastHeadContainer div.searchBarContainer {
+    margin-left: 3%;
+    width: 100%;
+}
+header#mastHeadContainer div.searchBarContainer form {
+    display: flex;
+    align-items: center;
+}
+header#mastHeadContainer div.searchBarContainer input[type='search'] {
+    width: 95%;
+    height: 100%;
+    border: 2px solid rgba(128, 0, 128, 0.500);
+    font-size: 1.6rem;
+    border-radius: 5px;
+    color: purple;
+    padding: .25rem 1rem;
+}
+header#mastHeadContainer div.searchBarContainer input[type='search']::placeholder {
+    color: purple;
+    opacity: .5;
+}
+header#mastHeadContainer div.searchBarContainer div.searchBtnContainer{
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+    
+}
+header#mastHeadContainer div.searchBarContainer div.searchBtnContainer input[type='image']{
+    width: 100%;
+    height: auto;
+    
+}
+
+header#mastHeadContainer button.menuBtn{
+    color: rgba(128, 0, 128, 0.700);
+    font-size: 1.6rem;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px solid rgba(128, 0, 128, 0.700);
+    padding: 0.15rem 1rem;
+    
+}
+label{
+    margin-bottom: .5rem;
+    font-size: 1.6rem;
+}
+
+header#mastHeadContainer .rigthIcon button{
+   background: none;
+   border: none;
+   width: 3rem;
+   margin-left: 2.5rem;
+    
+}
+header#mastHeadContainer .rigthIcon button img{
+    width: 100%;
+    height: auto;
+     
+ }
+
+aside#sideNavContainer{
+    width: 0rem;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding-top: 6rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: all .25s ease-in;
+}
+
+aside#sideNavContainer.open{
+    width: 24rem;
+    opacity: 1;
+}
+
+main#mainSectionContainer{
+    
+    padding-top: 6rem;
+    padding-left: 0rem;
+    transition: padding-left .25s ease-in;
+
+}
+main#mainSectionContainer.open{
+   padding-left: 24rem;
+}
+div#mainContentContainer{
+    
+    padding: 1rem 3rem;
+}
+div.column{
+    flex: 1;
+    background-color: #fff;
+    min-height: 30rem;
+    padding: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px;
+
+}
+
+div.column.uploadForm{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    
+}
+
+div.column.uploadForm #uploadVidForm{
+    width: 65%;
+}
+
+input.inputTitle{
+    width: 100%;
+    border: 2px solid rgba(128, 0, 128, 0.500);
+    font-size: 1.6rem;
+    border-radius: 5px;
+    color: purple;
+    padding: .25rem 1rem;
+    margin-bottom: 1rem;
+}
+
+div.inputFile{
+    font-size: 1.6rem;
+    position: relative;
+    border-radius: 5px;
+    width: 50%;
+    height: 4rem;
+    color: #fff;
+    font-weight: bold;
+    color: purple;
+    border: 3px solid rgba(128, 0, 128);
+    margin-bottom: 2.5rem;
+    margin-top: 2rem;
+}
+
+div.inputFile label, div.inputFile input{
+    cursor: pointer;
+    position: absolute;
+   
+}
+.uploadForm label{
+    font-size: 1.8rem;
+
+    
+}
+
+div.inputFile input{
+    width: 100%;
+    z-index: 2;
+    opacity: 0;
+}
+.uploadForm input::placeholder, .inputDescription::placeholder{
+    color: purple;
+}
+
+textarea.inputDescription{
+    width: 100%;
+    border: 2px solid rgba(128, 0, 128, 0.500);
+    font-size: 1.6rem;
+    border-radius: 5px;
+    color: purple;
+    padding: .25rem 1rem;
+    resize: none;
+    margin-bottom: 1rem;
+}
+
+select.privacyInput,select.categorieInput{
+    font-size: 1.6rem;
+    color: purple;
+    border: 2px solid rgba(128, 0, 128, 0.500);
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    width: 70%;
+
+}
+
+button.uploadBtn{
+    color: rgba(128, 0, 128, 0.700);
+    font-size: 1.8rem;
+    width: 30%;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px solid rgba(128, 0, 128, 0.700);
+    
+}
+div.modal-bg.show{
+    display: flex;
+}
+div.modal-bg{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+div.modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position:unset;
+    width: 40%;
+    height: 40%;
+    background-color: #f5f5f5;
+}
+
+div.modal h2{
+    margin-bottom: 5rem;
+}
+div.modal div.spinner{
+    width: 6rem;
+    height: 6rem;
+
+}
+
+.form-group{
+    margin-bottom: 1rem;
+}
+
+div.signInContainer,
+div.loginContainer{
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #efefee;
+}
+
+div.signInContainer div.column,
+div.loginContainer div.column
+{
+    flex: .5;
+    height: 92%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+div.signInContainer div.column
+{
+    height: 92%;
+}
+
+div.loginContainer div.column
+{
+    height: 50%;
+}
+
+div.signInContainer div.column div.header,
+div.loginContainer div.column div.header
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+div.signInContainer div.column div.header .logoContainerForm,
+div.loginContainer div.column div.header .logoContainerForm
+{
+    width: 3rem;
+    margin-right: 1rem;
+}
+div.containerHeadHeader{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+div.signInContainer div.column div.header h3,
+div.loginContainer div.column div.header h3{
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+div.signInContainer div.column div.header .logoContainerForm img,
+div.loginContainer div.column div.header .logoContainerForm img{
+    width: 100%;
+    height:auto;
+}
+div.loginForm form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+div.loginForm form div.form-group{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+}
+div.signInContainer div.loginForm form div.form-group{
+    margin-bottom: 1.5rem;
+}
+div.loginContainer div.loginForm form div.form-group{
+    margin-bottom: 2.5rem;
+}
+div.loginForm form div.form-group:last-of-type{
+    margin-bottom: 2rem;
+}
+
+div.loginForm form div.form-group label{
+    margin-bottom: .25rem;
+}
+
+div.loginForm form div.form-group input[type="text"], 
+div.loginForm form div.form-group input[type="email"] , 
+div.loginForm form div.form-group input[type="password"]{
+    min-width: 100%;
+    height: 100%;
+    border: 2px solid rgba(128, 0, 128, 0.500);
+    font-size: 1.6rem;
+    border-radius: 5px;
+    color: purple;
+    padding: .25rem 1rem;
+}
+
+div.loginForm form  input[type="submit"]{
+    color: rgba(128, 0, 128, 0.700);
+    font-size: 1.8rem;
+    width: 30%;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #fff;
+    border: 2px solid rgba(128, 0, 128, 0.700);
+}
+
+div.signInContainer a.signInMessgae,
+div.loginContainer a.signInMessgae{
+    text-decoration: none;
+    font-weight: 500;
+    width: 33%;
+    color: purple;
+    border-bottom: purple 2px solid;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+
+}
+
+span.errorMsg{
+    color:red;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: .25rem;
+}
+div.all{
+    width: 100%;
+    height: 100%;
+    display: flex;
+ 
+}
+div.watchLeftColumn{
+    max-width: 75%;
+    flex: 1;
+}
+
+div.watchLeftColumn .videoPlayer{
+    width: 100%;
+    max-height: 65%;
+}
+
+div.suggestion{
+    max-width: 25%;
+    flex-grow:1;
+    height: 100%;
+    padding-left: 3.4rem;
+}
+
+div.videoInfo{
+    width: 100%;
+    padding: 2rem 0 .8rem 0;
+}
+
+div.videoInfo h1{
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    overflow: hidden;
+
+}
+
+div.videoInfo div.bottomSection{
+    display: flex;
+}
+
+div.videoInfo div.bottomSection span.viewcount{
+    display: flex;
+    font-size: 1.6rem;
+    flex: 1;
+    color: rgba(17, 17, 17, 0.6);
+}
+
+div.videoInfo div.bottomSection div.controls{
+    flex: 1;
+    text-align: right;
+}
+
+div.videoInfo div.bottomSection div.controls button{
+    background-color: transparent;
+    border: none;
+    color: rgb(17, 17, 17,0.4);
+    font-weight: 500;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+div.videoInfo div.bottomSection div.controls button img{
+    height: 2rem;
+    width: 2rem;
+    margin: .4rem .8rem .8rem .8rem;
+}
+
+div.secondaryInfo div.topRow{
+    display: flex;
+    margin-bottom:1.2rem;
+}
+.profilePic{
+    height: 100%;
+}
+
+div.secondaryInfo div.topRow .profilePic{
+    margin-right: 1.6rem;
+    width: 4.8rem;
+    height: 4.8rem;
+    border-radius: 50%;
+}
+
+div.secondaryInfo div.topRow .uploadInfo{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+}
+
+div.secondaryInfo div.topRow .uploadInfo .date{
+    color: rgb(17, 17, 17,0.6);
+    font-size: 1.3rem;
+    font-weight: 400;
+}
+div.secondaryInfo{
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+div.secondaryInfo div.descriptionContainer{
+    margin-left: 6.4rem;
+    max-width: 61.5rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2.1rem;
+}
+
+div.secondaryInfo div.topRow .button{
+    padding:.6rem 1.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 2px;
+    border: none;
+    font-size: 1.4rem;
+}
+
+div.secondaryInfo div.topRow .edtiVideoBtnContainer,div.secondaryInfo div.topRow .subscribeBtnContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+div.secondaryInfo div.topRow .sub,
+div.secondaryInfo div.topRow .edit{
+    background-color: purple;
+    color: #fff;
+}
+div.secondaryInfo div.topRow .unsub{
+    background-color: #eee;
+    color: rgba(17, 17, 17, 0.6);
+}
+div.secondaryInfo div.topRow .owner a{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: black;
+    border: none;
+    text-decoration: none;
+}
