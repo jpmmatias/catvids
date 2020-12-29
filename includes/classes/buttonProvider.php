@@ -60,7 +60,7 @@ class ButtonProvider {
         $class= $isSubscribedTo ? 'unsub button' : 'sub button';
         $userto=$userto->getUsername();
         $user=$user->getUsername();
-        $onClick=$isSubscribedTo ? "unsubscribe(\"$user\",\"$userto\",this)" : "subscribe()";
+        $onClick= "subscribe(\"$userto\",\"$user\",this)";
 
        $button= ButtonProvider::createButton($class,$onClick,$buttonText,null);
 

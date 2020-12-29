@@ -71,7 +71,7 @@ class User
     {
         $username=$username->getUsername();
         $query = $this->conn->prepare("
-            SELECT COUNT(*) FROM inscricoes WHERE userTo=:username
+            SELECT * FROM inscricoes WHERE userTo=:username
         ");
 
         $query->bindParam(":username",$username);

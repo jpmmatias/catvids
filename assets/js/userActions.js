@@ -3,10 +3,16 @@ const subscribe=(userTo,userFrom,button)=>{
         alert("Você não pode se inscrever em você mesmo");
     }
 
-    $.post("ajax/subscribe.php")
+    $.post("ajax/subscribe.php",{userTo:userTo,userFrom:userFrom})
     .done(
-        ()=>{
-            console.log('done');
+        (data)=>{
+            if (data != null) {
+                $(button).toggleClass('sub unsub')
+                let btnText = $(button).hasClass('sub') ? 'INSCREVA-SE' : 'INSCRITO'
+                $(button).text(btnText + " "+ data)
+            }else{
+                alert('Algo deu errado')
+            }
         }
     )
 }
