@@ -216,6 +216,19 @@
             return $query->rowCount()>0;
             
         }
+
+        public function getNumOfComments(){
+            $videoId = $this->getId();
+            $query = $this->conn->prepare("
+                SELECT COUNT(*) AS 'count' FROM comments WHERE video_id=:id
+            ");
+            $query->bindParam(":id",$videoId);
+            $query->execute();
+            $query= $query->fetch(PDO::FETCH_ASSOC);
+            $numComments=$query['count'];
+            return $numComments;
+        }
+
     }
     
 
