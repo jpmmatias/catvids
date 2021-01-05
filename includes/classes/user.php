@@ -22,7 +22,8 @@ class User
     public function getUsername()
     {
         
-        return User::isLoggedIn() ? $this->sqlData["username"] : "";
+        return is_array($this->sqlData) ? $this->sqlData["username"] : "";
+
     }
     public function getFirstname()
     {
@@ -43,7 +44,7 @@ class User
 
     public function getProfilePic()
     {
-        return $this->sqlData["profile_pic"];
+        return is_array($this->sqlData) ? $this->sqlData["profile_pic"] : "";
     }
     public function getCreatedAt()
     {
@@ -66,10 +67,10 @@ class User
         return $query->rowCount()>0;
     }
 
-    public function getSubscribedCountFromUser($username)
+    public function getSubscribedCountFromUser($user)
   
     {
-        $username=$username->getUsername();
+        $username=$user->getUsername();
         $query = $this->conn->prepare("
             SELECT * FROM inscricoes WHERE userTo=:username
         ");
@@ -93,8 +94,27 @@ class User
         $query->execute();
         $subscriptions=$query->fetch(PDO::FETCH_ASSOC);
         return $subscriptions;
-
     }
+
+    public function getSubscriptions()
+    {
+        $username = $this->getUsername();
+        $query = $this->conn->prepare("
+            SELECT userTo FROM inscricoes WHERE userFrom=:username
+        ");
+
+        $query->bindParam(":username",$username);
+        $query->execute();
+        
+        $subs=array();
+        while ($row=$query->fetch(PDO::FETCH_ASSOC)) {
+            $user = new User($this->conn,$row["userTo"]);
+            array_push($subs,$user);
+        }
+        return $subs;
+    }
+
+
 
 
 }

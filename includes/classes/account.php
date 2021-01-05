@@ -115,6 +115,15 @@ class account
        }
     }
 
+    public function getFirstError()
+    {
+       if (!empty($this->errorArray)) {
+           return $this->errorArray[0];
+       } else{
+         return "";
+       }
+    }
+
     public function login($username,$password){
         $password=hash("sha256",$password);
         $query = $this->conn->prepare("
@@ -130,6 +139,77 @@ class account
             array_push($this->errorArray,constants::$loginFail);
             return false;
            
+        }
+    }
+
+    public function updateDetails($firstName,$lastName,$email,$username)
+    {
+        $this->validateFirstName($firstName);
+        $this->validateLastName($lastName);
+        $this->validateNewEmail($email,$username);
+
+        if (empty($this->errorArray)) {
+            $query= $this->conn->prepare(
+                "UPDATE users SET firstName=:firstName,lastName=:lastName,email=:email WHERE username=:username
+                "
+            );
+            $query->bindParam(":firstName",$firstName);
+            $query->bindParam(":lastName",$lastName);
+            $query->bindParam(":email",$email);
+            $query->bindParam(":username",$username);
+            return $query->execute();
+         } 
+
+    }
+
+    public function updatePassword($oldPassword,$newPassword,$newPassword2,$username)
+    {
+        $this->validateOldPassword($oldPassword,$username);
+        $this->validatePassword($newPassword,$newPassword2);
+
+        if (empty($this->errorArray)) {
+            $newPassword=hash("sha256",$newPassword);
+            $query= $this->conn->prepare(
+                "UPDATE users SET password=:password WHERE username=:username
+                "
+            );
+            $query->bindParam(":password",$newPassword);
+            $query->bindParam(":username",$username);
+            return $query->execute();
+         } 
+
+    }
+
+    private function validateOldPassword($oldPassword,$username)
+    {
+        $query= $this->conn->prepare(
+            "SELECT password as 'password' FROM users WHERE username=:username
+            "
+        );
+        $query->bindParam(":username",$username);
+        $query->execute();
+        $res = $query->fetch(PDO::FETCH_ASSOC);
+        $password=$res["password"];
+        $oldPassword=hash("sha256",$oldPassword);
+       
+        if ($oldPassword != $password) {
+        array_push($this->errorArray,constants::$passwordIncorrect);
+        }
+
+    }
+    private function validateNewEmail($email,$username)
+    {
+        if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+            array_push($this->errorArray,constants::$emailNotValid);
+            return;
+        }
+        $query= $this->conn->prepare("SELECT username FROM users WHERE email = :email AND username != :username");
+        $query->bindParam(":email",$email);
+        $query->bindParam(":username",$username);
+        $query->execute();
+
+        if ($query->rowCount()!=0) {
+            array_push($this->errorArray,constants::$emailAlreadyExists);
         }
     }
 

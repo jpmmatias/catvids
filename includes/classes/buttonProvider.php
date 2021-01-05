@@ -21,7 +21,7 @@ class ButtonProvider {
     public static function createUserProfileButton($conn,$username){
         $userObj = new User($conn,$username);
         $profilePic = $userObj->getProfilePic();
-        $link = "profile.php/?username=$username";
+        $link = "profile.php?username=$username";
 
         return "
                 <a href='$link'>
@@ -68,6 +68,28 @@ class ButtonProvider {
         <div class='subscribeButtonContainer'>
             $button
         </div>";
+    }
+
+    public static function createUserProfileNavigationButton($conn,$username)
+    {
+        if (User::isLoggedIn()) {
+            return ButtonProvider::createUserProfileButton($conn,$username);
+        } else{
+            return "
+            <div class='notLoged'>
+                <a href='signIn.php'>
+                 <span class='signInLink'>
+                     CRIAR CONTA
+                 </span>
+                </a>
+                <a href='login.php'>
+                    <span class='signInLink'>
+                        FAZER LOGIN
+                    </span>
+                </a>
+            </div>
+            ";
+        }
     }
 
     

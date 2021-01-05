@@ -1,5 +1,6 @@
 <?php 
 require_once('includes/header.php');
+require_once('includes/classes/comment.php');
 require_once('includes/classes/videoPlayer.php');
 require_once('includes/classes/videoInfoSection.php');
 require_once('includes/classes/commentSection.php');
@@ -25,8 +26,12 @@ require_once('includes/classes/commentSection.php');
 ?>
     </div>
     <?php echo $commentSection->create(); ?>
-    <div class="suggestion">
-    </div>
+</div>
+<div class="suggestion">
+    <?php 
+            $videoGrid= new VideoGrid($conn,$user);
+            echo $videoGrid->create(null,null,false);
+        ?>
 </div>
 
 

@@ -19,6 +19,11 @@ class CommentSection{
         $commentAction = "postComment(this, \"$postedBy\", $videoId, null, \"comments\")";
         $commentButton = ButtonProvider::createButton('postComment',$commentAction,'COMENTE',null);
 
+        $comments=$this->video->getComments();
+        $commentItems="";
+        foreach ($comments as $comment ) {
+            $commentItems .= $comment->create();
+        }
         return "<div class='commentSection'>
                 <div class='header'>
                     <span class='commentCount'>
@@ -30,7 +35,7 @@ class CommentSection{
                     $commentButton
                 </div>
                 </div>
-                    <div class='comments'></div>
+                    <div class='comments'>$commentItems</div>
                 </div>";
         
     }

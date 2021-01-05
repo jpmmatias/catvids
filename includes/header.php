@@ -1,10 +1,15 @@
 <?php require_once('includes/config.php'); 
+require_once('includes/classes/buttonProvider.php');
 require_once('includes/classes/video.php');
 require_once('includes/classes/user.php'); 
-session_start();
+require_once('includes/classes/videoGrid.php');
+require_once('includes/classes/videoGridItem.php'); 
+require_once('includes/classes/navigationMenuProvider.php');
+require_once('includes/classes/subscriptionsProvider.php'); 
+// session_start();
 $usernameLoggedIn= User::isLoggedIn() ? $_SESSION["userLoggedIn"] : "";
 $user = new User($conn,$usernameLoggedIn);
-
+// session_destroy();
 ?>
 
 
@@ -40,18 +45,26 @@ $user = new User($conn,$usernameLoggedIn);
                     </form>
                 </div>
             </div>
-            <div class="rigthIcon">
+            <?php 
+            if (User::isLoggedIn()) {
+                echo '<div class="rigthIcon">
                 <button type="button" aria-roledescription="Botão para upload de vídeo">
                     <a href="upload.php">
                         <img src="assets\imgs\upload.svg" aria-disabled="true" alt="Icon de upload de video">
                     </a>
-                </button>
-                <button type="button" aria-roledescription="Botão para ver pefil">
-                    <img src="assets\imgs\user.svg" aria-disabled="true" alt="Icon de perfil">
-                </button>
-            </div>
-        </header>
-        <aside id="sideNavContainer">
-        </aside>
-        <main id="mainSectionContainer">
-            <div id="mainContentContainer">
+                </button>';
+            }
+            ?>
+            <?php 
+                    echo ButtonProvider::createUserProfileNavigationButton($conn,$user->getUsername());
+               ?>
+    </div>
+    </header>
+    <aside id="sideNavContainer">
+        <?php
+            $navigationProvider = new NavigationMenuProvider($conn,$user);
+            echo $navigationProvider->create();
+        ?>
+    </aside>
+    <main id="mainSectionContainer">
+        <div id="mainContentContainer">

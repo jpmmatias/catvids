@@ -8,10 +8,10 @@ class videoDetailsFormProvider {
     }
     public function createUploadForm(){
         $fileInput = $this ->createFileInput();
-        $titleInput = $this ->createTitleInput();
-        $descriptionInput = $this ->createDescriptionInput();
-        $privacyInput = $this ->createPrivacicyInput();
-        $categoriesInput = $this->createCategoriesInput();
+        $titleInput = $this ->createTitleInput(null);
+        $descriptionInput = $this ->createDescriptionInput(null);
+        $privacyInput = $this ->createPrivacicyInput(null);
+        $categoriesInput = $this->createCategoriesInput(null);
         $uploadButton= $this->createUploadButton();
 
         return "
@@ -25,6 +25,23 @@ class videoDetailsFormProvider {
         </form>";
     }
 
+    public function createEditoForm($video){
+        $titleInput = $this ->createTitleInput($video->getTitle());
+        $descriptionInput = $this ->createDescriptionInput($video->getDescription());
+        $privacyInput = $this ->createPrivacicyInput($video->getPrivacy());
+        $categoriesInput = $this->createCategoriesInput($video->getCategory());
+        $saveButton= $this->createSaveButton();
+
+        return "
+        <form id='editVideoForm' method='POST'>
+             $titleInput
+             $descriptionInput
+             $privacyInput
+             $categoriesInput
+             $saveButton
+        </form>";
+    }
+
     private function createFileInput(){
        return '
        <div class="custom-file inputFile d-flex justify-content-center align-items-center flex-column">
@@ -33,37 +50,53 @@ class videoDetailsFormProvider {
         </div>';
     }
 
-    private function createTitleInput(){
-        return '
-        <div class="form-group">
-            <label for="inputTitle">Título</label>
-            <input type="text" class="form-control inputTitle" name="inputTitle" id="inputTitle" placeholder="Titulo" required>
+    private function createTitleInput($value){
+        if ($value==null) {
+            $value="";
+        }
+        return "
+        <div class='form-group'>
+            <label for='inputTitle'>Título</label>
+            <input type='text' class='form-control inputTitle' name='inputTitle' id='inputTitle' placeholder='Titulo' value='$value' required>
         </div>
-        ';
+        ";
     }
     
-    private function createDescriptionInput(){
-        return '
-        <div class="form-group">
-            <label for="inputDescription">Descrição</label>
-            <textarea class="form-control inputDescription" name="inputDescription" placeholder="Descrição" " rows="3"></textarea>
+    private function createDescriptionInput($value){
+        if ($value==null) {
+            $value="";
+        }
+        return "
+        <div class='form-group'>
+            <label for='inputDescription'>Descrição</label>
+            <textarea class='form-control inputDescription' name='inputDescription' placeholder='Descrição' rows='3'>
+                $value
+            </textarea>
         </div>
-        ';
+        ";
     }
 
-    private function createPrivacicyInput(){
-        return '
-        <div class="form-group">
-            <label for="privacyInput">Selecione Privacidade</label>
-            <select class="form-control privacyInput" name="privacyInput">
-                <option value="0">Publico</option>
-                <option value="1">Privado</option>
+    private function createPrivacicyInput($value){
+        if ($value==null) {
+            $value="";
+        }
+        $privateSelected = ($value==0) ? "selected='selected'":"";
+        $publicSelected = ($value==1) ? "selected='selected'":"";
+        return "
+        <div class='form-group'>
+            <label for='privacyInput'>Selecione Privacidade</label>
+            <select class='form-control privacyInput' name='privacyInput'>
+                <option value='0' $privateSelected>Publico</option>
+                <option value='1' $publicSelected>Privado</option>
             </select>
         </div>
-        ';
+        ";
     }
 
-    private function createCategoriesInput(){
+    private function createCategoriesInput($value){
+        if ($value==null) {
+            $value="";
+        }
         $query= $this->conn->prepare("SELECT * FROM categorias");
         $query->execute();
         
@@ -75,7 +108,8 @@ class videoDetailsFormProvider {
         while ($row=$query->fetch(PDO::FETCH_ASSOC)) {
             $name=$row['name'];
             $id=$row['id'];
-           $html.= "<option value='$id'>$name</option>";
+            $selected = ($id==$value) ? "selected='selected'":"";
+           $html.= "<option $selected value='$id'>$name</option>";
           };
         $html.="</select>
            </div>";
@@ -86,5 +120,9 @@ class videoDetailsFormProvider {
 
     private function createUploadButton(){
         return "<button name='uploadButton' class='btn uploadBtn' type='submit'>Upload</button>";
+    }
+
+    private function createSaveButton(){
+        return "<button name='saveButton' class='btn uploadBtn' type='submit'>Salvar</button>";
     }
 }

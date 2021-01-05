@@ -7,12 +7,16 @@
     box-sizing: border-box;
 }
 body{
+
     overflow-x: hidden;
+    background-color: #fafafa !important;
 }
 div#pageContainer{
     width: 100vw;
-    min-height: 100vh;
-    background-color: #fafafa;
+}
+
+a{
+    text-decoration: none !important;
 }
 
 header#mastHeadContainer{
@@ -96,6 +100,12 @@ label{
     font-size: 1.6rem;
 }
 
+header#mastHeadContainer .rigthIcon{
+    display: flex;
+}
+header#mastHeadContainer .rigthIcon .profilePic{
+    height: 90%;
+}
 header#mastHeadContainer .rigthIcon button{
    background: none;
    border: none;
@@ -111,37 +121,41 @@ header#mastHeadContainer .rigthIcon button img{
 
 aside#sideNavContainer{
     width: 0rem;
+    display: none;
     height: 100%;
     background-color: #f5f5f5;
     padding-top: 6rem;
     position: fixed;
     left: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
+    top: 0;
     opacity: 0;
-    transition: all .25s ease-in;
+    transition: opacity 10s ease-in;
 }
 
 aside#sideNavContainer.open{
+    
     width: 24rem;
     opacity: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
 }
 
 main#mainSectionContainer{
     
     padding-top: 6rem;
     padding-left: 0rem;
-    transition: padding-left .25s ease-in;
+    transition: padding-left .1s ease-in;
 
 }
 main#mainSectionContainer.open{
    padding-left: 24rem;
 }
 div#mainContentContainer{
-    
     padding: 1rem 3rem;
+    background-color: #fafafa;
 }
+
 div.column{
     flex: 1;
     background-color: #fff;
@@ -421,7 +435,8 @@ div.watchLeftColumn{
 
 div.watchLeftColumn .videoPlayer{
     width: 100%;
-    max-height: 65%;
+    object-fit: contains;
+    height:50rem;
 }
 
 div.suggestion{
@@ -548,6 +563,7 @@ div.secondaryInfo div.topRow .owner a{
 }
 div.commentSection {
     height: auto;
+    background-color: #fafafa;
 }
 
 div.commentSection div.header{
@@ -560,12 +576,12 @@ div.commentSection div.header{
 div.commentSection div.header .commentCount{
     margin-bottom: 2.4rem;
 }
-div.commentSection div.header div.commentForm{
+div.commentSection div.header div.commentForm,div.commentSection .itemContainer  div.commentForm {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-div.commentSection div.header div.commentForm textarea{
+div.commentSection div.header div.commentForm textarea,div.commentSection .itemContainer div.commentForm textarea{
     flex:1;
     padding: .5rem;
     border: none;
@@ -576,19 +592,474 @@ div.commentSection div.header div.commentForm textarea{
     resize: none;
 
 }
-div.commentSection div.header div.commentForm .profilePic{
+div.commentSection .itemContainer div.commentForm textarea{
+    height: 3.5rem;
+    padding: .25rem;
+}
+div.commentSection div.header div.commentForm .profilePic,div.commentSection .comment .profilePic, div.commentForm .profilePic{
     margin-right: 1.6rem;
     width: 4.8rem;
     height: 4.8rem;
     border-radius: 50%;
 }
-div.commentSection div.header div.commentForm .postComment{
+div.commentSection div.header div.commentForm .postComment, .itemContainer  div.commentForm .postComment,.itemContainer  div.commentForm .cancelComent {
     margin-left: 1rem;
     height: 3.6rem;
     background-color: #2692e6;
     color: #fff;
     border: none;
-    font-weight: 500;
+    font-weight: 600;
     padding: 0 1.5rem;
     border-radius: 2px;
 }
+
+.itemContainer  div.commentForm .cancelComent {
+    background-color: transparent;
+    color: rgba(17, 17, 17, 0.8);
+}
+
+.itemContainer  div.commentForm .cancelComent:hover {
+    color: #000;
+}
+.itemContainer  div.commentForm {
+   margin-bottom: 1.6rem;
+}
+.commentSection .comment{
+    display: flex;
+}
+
+.commentSection .comment .commentHeader{
+    margin-bottom: .2rem;
+}
+
+.commentSection .comment .commentHeader .username{
+    margin-right: .8rem;
+    color: #111111;
+  
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.commentSection .comment .commentHeader a{
+  text-decoration: none;
+}
+
+.commentSection .comment .body{
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 20px;
+
+}
+
+.itemContainer .controls{
+    margin-left: 6.4rem;
+    margin-bottom: .5rem;
+} 
+.itemContainer .controls button,.itemContainer .controls span.likeCount{
+    height: 3.2rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgba(17, 17, 17, .7);
+} 
+
+.itemContainer .controls button{
+  cursor: pointer;
+} 
+
+.itemContainer .controls span.likeCount{
+    margin: 0 5px;
+}
+.itemContainer .controls button img{
+    height: 1.6rem;
+}
+
+.itemContainer .commentForm .profilePic{
+    width: 3rem;
+    height: 3rem;
+}
+
+.commentSection .comment .timeStamp{
+    color: #888;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.comments .repliesSection{
+    padding-left: 6.4rem;
+    margin-top: 1.6rem;
+
+}
+
+.commentSection .itemContainer .viewReplies{
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.videoGrid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.suggestion .videoGridItem{
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.videoGridItem{
+    margin-right: .4rem ;
+    margin-bottom: 2.4rem;
+    height: 20rem;
+}
+
+.videoGridItem .thumbnail{
+    width: 21rem;
+    height: 11.8em;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.suggestion .videoGridItem .thumbnail{
+    width: 10.8rem;
+    height: 6.8em;
+}
+
+.videoGridItem .thumbnail img{
+    width:100%;
+    height: 100%;
+}
+.videoGridItem .thumbnail .duration{
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin: .4rem;
+    color: #fff;
+    background-color: rgba(128, 0, 128, 0.600);
+    opacity: 0.9;
+    padding: .2rem .4rem;
+    border-radius: 2px;
+    letter-spacing: 0.05rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 1.2rem;
+}
+
+.videoGrid .details{
+    padding-right: 2.4rem;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 21rem;
+}
+.videoGrid .details .title{
+    margin: 0.8rem 0;
+    max-height: 3.2rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 1.6rem;
+    color: #212529;
+    overflow: hidden;
+}
+.videoGrid .details .usernaem,
+.videoGrid .details .stats{
+    color: purple;
+    font-weight: 500;
+    font-size:1.3rem;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.suggestion .videoGrid .details{
+    padding-right:0;
+    flex:1;
+}
+.videoGridHeader{
+    margin-bottom: 1.5rem;
+    display: flex;
+
+}
+.videoGridHeader div{
+    flex: 1;
+}
+.videoGridHeader .left{
+    font-weight: 600;
+    font-size: 1.8rem; 
+}
+
+.videoGrid.large{
+    flex-direction: column;
+    flex: 1;
+}
+.videoGrid.large .videoGridItem{
+    height: auto;
+    display: flex;
+}
+
+.videoGrid.large .videoGridItem .thumbnail{
+  width:26.6rem;
+  height: 13.8rem;
+  margin-right: 1.6rem;
+}
+
+.videoGrid.large .videoGridItem .details{
+    max-width: 60rem;
+  }
+
+  .videoGrid.large .videoGridItem .details .title{
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
+
+  .videoGridItem .details .description{
+    color: #4444;
+    font-size: 1.4rem;
+  }
+
+  .largeVideoGridContainer{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .videoGridHeader .right{
+    text-align: right;
+  }
+
+  .videoGridHeader a{
+    color:rgba(17, 17, 17, 0.9)
+}
+.videoGridHeader a::after{
+   content: ' |';
+}
+.videoGridHeader a::before{
+    content: ' | ';
+ }
+ .videoGridHeader a :last-child:after{
+    content: '';
+ }
+ span.signInLink{
+    color:purple;
+    margin-left: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+ }
+
+ header img.profilePic{
+    height: 60%;
+    margin-left: 2rem;
+ }
+
+ #sideNavContainer .navvigationItems{
+    overflow-y:auto; 
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+ #sideNavContainer .navvigationItem{
+    height: 1.4rem;
+    display: flex;
+    margin-bottom: 2rem;
+}
+#sideNavContainer .navigationItem img{
+    height: 1.8rem;
+    margin-right: 2.7rem;
+}
+
+#sideNavContainer .navigationItem span{
+    flex: 1;
+    color: #111;
+    font-size: 1.4rem;
+}
+#sideNavContainer .navigationItem a{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding:0 2.4rem;
+}
+#sideNavContainer .navigationItem a:hover{
+   background-color: rgba(128, 0, 128, 0.17);
+}
+
+#sideNavContainer .heading{
+    color: rgba(17, 17, 17, .6);
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 1rem 2.4rem 0;
+    border-top: 1px solid rgba(128, 0, 128, 0.445);
+    display: block;
+}
+
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.coverPhotoContainer{
+    position: relative;
+    height: 25rem;
+    flex: 1;
+}
+
+.coverPhotoContainer .coverPhoto{
+    width: 100%;
+    object-fit: cover;
+    max-height: 100%;
+    vertical-align: middle;
+
+}
+.coverPhotoContainer .coverName{
+    position: absolute;
+    width: 100%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 20%;
+    text-align: center;
+    font-size: 5rem;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: .5rem;
+    text-shadow: 1px 4px 2px rgb(17, 17, 17,.5);
+}
+
+.profileHeader{
+    padding: 1.5rem 10rem 0 10rem;
+    display: flex;
+    height: 10rem;
+
+}
+
+.profileHeader .userInfoContainer{
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+}
+.profileHeader .userInfoContainer .profileImage{
+    height: 5rem;
+    width: 5rem;
+}
+.profileHeader .userInfo{
+    flex: 1;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profileHeader .userInfo .title{
+    font-size:2.4rem;
+    font-weight: 400;
+    color:#111;
+}
+.profileHeader .userInfo .subCount{
+    font-size: 1.4rem;
+    color: rgb(17, 17, 17,0.6);
+}
+
+.profileHeader .buttonContainer{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.profileHeader .buttonContainer .buttonItem{
+    align-items: center;
+    display: flex;
+}
+.profileHeader .buttonContainer .buttonItem button{
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.profileContainer .channelContent{
+    padding: 2rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top:none;
+}
+.nav-item a{
+    color: rgb(17, 17, 17,0.6);
+    font-size: 1.4rem;
+}
+.channelContent .section .title span{
+    font-size: 1.5rem;
+}
+.channelContent .section .title{
+
+    margin-bottom: .5rem;
+}
+.channelContent .section .values{
+    color: rgb(17, 17, 17,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 1.4rem;
+}
+.channelContent .section .values span{
+    margin-bottom: .25rem;
+}
+.formSection:not(:last-child){
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #dedede;
+}
+.settingsContainer form{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.settingsContainer form .title{
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.editVideoContainer{
+    display: flex;
+    flex-direction: column;
+}
+.editVideoContainer .topSection{
+   display: flex;
+}
+
+.topSection .videoPlayer{
+    width: 30rem;
+    flex: 1;  
+}
+
+.topSection .thumbnailItemsContainer{
+    display: flex;
+    flex-direction: column;
+    margin:0 1rem;
+    width: 21rem;
+} 
+
+.topSection .thumbnailItemsContainer .thumbnailItem{
+    margin-bottom: 1rem;
+    padding: .2rem;
+} 
+
+.topSection .thumbnailItemsContainer .thumbnailItem.selected{
+    border: 3px solid rgba(128, 0, 128, 0.445);
+} 
+
+.topSection .thumbnailItemsContainer .thumbnailItem img{
+   width:100%;
+    cursor: pointer;
+} 

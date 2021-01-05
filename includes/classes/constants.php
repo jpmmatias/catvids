@@ -11,6 +11,8 @@ class constants
     public static $passwordToShort = "A senha precia ter no minimo 5 caracteres, por favor tente novamente";
     public static $passwordTooWeak = "A senha precisa possuir letra, numero e caracteres especiais (como por ex: @, #, $, etc..)";
     public static $loginFail = "O seu username ou senha estava incorreto, tente novamente";
+    public static $passwordIncorrect = "Senha incorreta";
+
 }
 
 ?>
